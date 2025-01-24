@@ -2,7 +2,8 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import "../styles/global.scss";
-import "../styles/waline.scss";
+import SpeedInsights from "@vercel/speed-insights/astro";
+// import "../styles/waline.scss";
 interface Props {
   title: string;
   description: string;
@@ -25,3 +26,5 @@ const { title, description, image } = Astro.props;
 <meta name="description" content={description} />
 {image && <meta property="og:image" content={image} />}
 <link rel="canonical" href={canonicalURL.toString()} />
+
+<SpeedInsights />
