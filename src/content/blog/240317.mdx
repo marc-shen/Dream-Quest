@@ -1,0 +1,132 @@
+---
+title: "Ubuntu 常用设置"
+description: "一点小技巧"
+pubDate: "Mar 17 2024"
+# image: /image/image3.jpg
+categories:
+  - tech
+tags:
+  - Linux
+---
+
+```shell
+http://mirrors.tuna.tsinghua.edu.cn/ubuntu/
+https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/
+```
+
+
+```/etc/apt/sources.list
+# /etc/apt/sources.list
+# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-updates main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-updates main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-backports main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-backports main restricted universe multiverse
+
+deb http://security.ubuntu.com/ubuntu/ jammy-security main restricted universe multiverse
+# deb-src http://security.ubuntu.com/ubuntu/ jammy-security main restricted universe multiverse
+
+# 预发布软件源，不建议启用
+# deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-proposed main restricted universe multiverse
+# # deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-proposed main restricted universe multiverse
+```
+
+```/etc/apt/sources.list.d/ubuntu.sources
+# /etc/apt/sources.list.d/ubuntu.sources
+Types: deb
+URIs: https://mirrors.tuna.tsinghua.edu.cn/ubuntu
+Suites: noble noble-updates noble-backports
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+# Types: deb-src
+# URIs: https://mirrors.tuna.tsinghua.edu.cn/ubuntu
+# Suites: noble noble-updates noble-backports
+# Components: main restricted universe multiverse
+# Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+# 以下安全更新软件源包含了官方源与镜像站配置，如有需要可自行修改注释切换
+Types: deb
+URIs: http://security.ubuntu.com/ubuntu/
+Suites: noble-security
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+# Types: deb-src
+# URIs: http://security.ubuntu.com/ubuntu/
+# Suites: noble-security
+# Components: main restricted universe multiverse
+# Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+# 预发布软件源，不建议启用
+
+# Types: deb
+# URIs: https://mirrors.tuna.tsinghua.edu.cn/ubuntu
+# Suites: noble-proposed
+# Components: main restricted universe multiverse
+# Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+# # Types: deb-src
+# # URIs: https://mirrors.tuna.tsinghua.edu.cn/ubuntu
+# # Suites: noble-proposed
+# # Components: main restricted universe multiverse
+# # Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+```
+
+```shell
+sudo dpkg-reconfigure console-setup
+```
+
+```shell
+$ sudo vim /etc/default/grub
+GRUB_CMDLINE_LINUX="fbcon=rotate:1"
+$ sudo update-grub
+```
+
+```shell
+echo 1 | sudo tee /sys/class/graphics/fbcon/rotate
+echo 1 | sudo tee /sys/class/graphics/fbcon/rotate_all
+```
+
+```shell
+sudo apt install zsh
+chsh -s $(which zsh)
+sudo chsh -s $(which zsh)
+```
+
+```shell
+$ sudo vim /etc/sudoers
+username ALL=(ALL:ALL) NOPASSWD:ALL
+```
+
+```shell
+sudo apt install build-essential
+sudo apt install gcc gfortran
+```
+
+```shell
+mkdir -p ~/miniconda3
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+rm -rf ~/miniconda3/miniconda.sh
+```
+
+```shell
+#!/bin/bash
+#SBATCH -N 1
+#SBATCH -n 4
+
+# specify all the variables
+EXECUTABLE=/home/chantian/tristan-mp-v2/bin/tristan-mp2d
+INPUT=/home/chantian/tristan-mp-v2/inputs/input.2d_rec
+OUTPUT_DIR=/home/chantian/program/output
+SLICE_DIR=/home/chantian/program/slices
+RESTART_DIR=/home/chantian/program/restart
+REPORT_FILE=report
+ERROR_FILE=error
+
+srun $EXECUTABLE -i $INPUT -o $OUTPUT_DIR -s $SLICE_DIR -r $RESTART_DIR >$OUTPUT_DIR/$REPORT_FILE 2>$OUTPUT_DIR/$ERROR_FILE
+```

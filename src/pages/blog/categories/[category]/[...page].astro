@@ -10,7 +10,9 @@ import { t } from "i18next";
 export async function getStaticPaths({ paginate }: { paginate: any }) {
   const all_posts = await getCollection("blog");
 
-  const all_categories = [...new Set(all_posts.flatMap((post: any) => post.data.categories || []))];
+  const all_categories = [
+    ...new Set(all_posts.flatMap((post: any) => post.data.categories || [])),
+  ];
 
   all_posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
@@ -28,7 +30,9 @@ export async function getStaticPaths({ paginate }: { paginate: any }) {
   );
 
   return all_categories.flatMap((category) => {
-    const filtered_posts = postsWithStats.filter((post) => post.data.categories?.includes(category));
+    const filtered_posts = postsWithStats.filter((post) =>
+      post.data.categories?.includes(category),
+    );
     return paginate(filtered_posts, {
       params: { category },
       pageSize: 8,
