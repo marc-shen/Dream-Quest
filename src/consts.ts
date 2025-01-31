@@ -4,14 +4,14 @@
 // Site title and description
 export const SITE_LANG = "zh";
 export const SITE_TAB = "Dream-Quest";
-export const SITE_TITLE = "Dream-Quest 🌇";
+export const SITE_TITLE = "Dream-Quest";
 export const SITE_DESCRIPTION = "Kadath Drawer's personal blog";
 export const DATE_FORMAT = "ddd MMM DD YYYY";
 
 // User profile information
 export const USER_NAME = "Kadath Drawer";
 export const USER_SITE = "https://blog.stic.work"; // At the same time, this is also the site retrieved by the i18n configuration.
-export const USER_AVATAR = "/profile.webp";
+export const USER_AVATAR = "/profile.jpeg";
 
 // Server and transition settings
 export const SERVER_URL = "https://blog.stic.work";
@@ -57,19 +57,19 @@ export const menuItems = [
         target: "_self",
       }, // All blog
       {
-        id: "tech",
-        text: "科技/Tech blogs",
-        href: "/blog/categories/tech",
-        svg: "material-symbols:deployed-code-outline",
-        target: "_self",
-      }, // Technology category
-      {
         id: "life",
         text: "生活/Life blogs",
         href: "/blog/categories/life",
         svg: "material-symbols:earthquake-rounded",
         target: "_self",
       }, // Life category
+      {
+        id: "tech",
+        text: "科技/Tech blogs",
+        href: "/blog/categories/tech",
+        svg: "material-symbols:deployed-code-outline",
+        target: "_self",
+      }, // Technology category
     ],
   }, // Blog page with sub-items
   {
