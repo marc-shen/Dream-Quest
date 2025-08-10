@@ -98,7 +98,7 @@ export const menuItems = [
 // Social media and contact icons
 export const socialIcons = [
   {
-    href: "https://afdian.com/a/ChanTian",
+    href: "https://patreon.com/KadathDrawer",
     ariaLabel: "Support my work",
     title: "Support my work",
     svg: "ri:cup-line",
